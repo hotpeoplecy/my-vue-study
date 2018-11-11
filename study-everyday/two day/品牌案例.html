@@ -79,8 +79,16 @@
                         var car = {id: this.id, name: this.name, ctime: new Date()}
                         this.list.push(car)
                         this.id = this.name = ''
-                    }
-                },
+                    },
+                    del(id) {
+                        this.list.some((item, i) => {
+                            if(item.id == id) {
+                                this.list.splice(i, 1)
+                                return true;
+                            }
+                        })
+                    },
+                }
                 
             })
             
