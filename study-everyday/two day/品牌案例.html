@@ -52,7 +52,7 @@
                         <td>{{item.name}}</td>
                         <td>{{item.ctime}}</td>
                         <td>
-                            <a href="" @click.prevent="del(item.id)">删除</a>
+                           <a href="" @click.prevent="del(item.id)">删除</a>
                         </td>
                     </tr>
                 </tbody>
@@ -61,52 +61,30 @@
         </div>
 
         <script>
-            
-           var vm = new Vue({
-               el: '#app',
-               data: {
-                   id: '',
-                   name: '',
-                   list: [
-                       {id: 1, name: '奥迪', ctime: new Date},
-                       {id: 2, name: '奔驰', ctime: new Date}
-                   ]
-               },
-               methods: {
-                   add() {
-                    //    console.log('dd')
-                    var car = {id: this.id, name: this.name, ctime: new Date()}
-                   this.list.push(car)
-                    this.id = this.name = ''
-                   },
-                   del(id){
-                       //第一种方法用some循环
-                    //    this.list.some((item, i) => {
-                    //        if(item.id == id) {
-                    //            this.list.splice(i, 1)
-                    //            return true;
-                    //        }
-                    //    })
 
-                    var index = this.list.findIndex(item => {
-                        if(item.id == id) {
-                            return true;
-                        }
-                    })
-                    this.list.splice(index, 1)
-                   }
-               },
-
-
-
-
-
+            var vm = new Vue({
+                el: '#app',
+               
+                data: {
+                    id: '',
+                    name: '',
+                    
+                    list: [
+                        {id: 1, name: 'zx', ctime: new Date()},
+                        {id: 2, name: 'zx1', ctime: new Date()}
+                    ]
+                },
+                methods: {
+                    add() {
+                        var car = {id: this.id, name: this.name, ctime: new Date()}
+                        this.list.push(car)
+                        this.id = this.name = ''
+                    }
+                },
                 
-                  
-           })
-
-        
-        
+            })
+            
+           
         </script>
     
 </body>
