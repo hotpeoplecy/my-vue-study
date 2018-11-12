@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <style>
+    
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.8s ease;
+        }
+
+
+        .you-enter,
+        .you-leave-to {
+            opacity: 0;
+            transform: translateY(300px);
+        }
+
+        .you-enter-active,
+        .you-leave-active {
+            transition: all 0.8s ease;
+        }
+
+
+    
+    
+    
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <input type="button" value="点我试试" @click="flag=!flag">
+        <transition>
+                <h1 v-if="flag"> 周旭说他自己是个大傻逼 </h1>
+        </transition> 
+
+       
+        <input type="button" value="敢点我试试" @click="flag2=!flag2">
+        <transition name="you"> 
+            <h1 v-if="flag2">你说的真对</h1>
+        </transition>
+        
+    </div>
+
+    <script>
+        
+         var vm = new Vue({
+            el: '#app',
+            data: {
+                flag:false,
+                flag2:false
+            },
+            methods: {},
+        })
+
+    </script>
+   
+    
+</body>
+</html>
