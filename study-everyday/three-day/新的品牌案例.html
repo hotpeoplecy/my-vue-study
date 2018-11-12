@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script src="./lib/vue-resource-1.3.4.js"></script>
+  <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css">
+</head>
+
+<body>
+  <div id="app">
+
+
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">添加品牌</h3>
+      </div>
+      <div class="panel-body form-inline">
+
+        <label>
+          Name:
+          <input type="text" v-model="name" class="form-control">
+        </label>
+
+        <input type="button" value="添加" @click="add" class="btn btn-primary">
+      </div>
+    </div>
+
+
+
+    <table class="table table-bordered table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Ctime</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in list" :key="item.id">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.ctime}}</td>
+          <td>
+            <a href="" @click.prevent="del(item.id)">删除</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+  <script>
+    // 1.配置全局的网站接口文档
+    Vue.http.options.root = 'http://www.lovegf.cn:8899';
+    // 2.配置全局的emulateJSON文件
+    Vue.http.options.emulateJSON = true;
+
+    //3.创建Vue实例对象
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        //定义一个空数组，存放后期所有添加的数组
+        list: []
+      },
+      // created()生命周期函数，可以访问里面的date和methods方法
+      // 作用：让页面已加载就有数据显示
+      created(){
+        //获取
+        this.getAllList();
+      },
+      methods: {
+        // 获取所有的品牌列表
+        getAllList() {
+           //4.通过this.$http来发起数据请求
+        this.$http.get('api/getprodlist').then((result) => {
+             if(result.body.status === 0) {
+               this.list = result.body.message
+             } else {
+               alert('获取数据失败')
+             }
+          })  
+        },
+        // 5.添加数据到页面
+        add() {
+          // add()方法中通过this.$http方式发起请求，要添加三个参数：请求地址 提交给服务器的数据:对象形式 以JSON格式发送
+          this.$http.post('api/addproduct', {name: this.name}).then(result => {
+            if(result.body.status === 0) {
+              // 调用成功，手动调用一下getAllList函数，刷新页面
+              this.name = ''
+              this.getAllList();
+            } else {
+              alert: ('添加失败')
+            }
+          })
+        },
+        del(id) {
+          this.$http.get('api/delproduct/ + id').then(result => {
+            if(result.body.status === 0) {
+              this.getAllList()
+            } else {
+              alert('删除数据失败')
+            }
+          })
+        },
+       
+      }
+    })
+
+    // 在post方法中，如果通过then方法设置回调函数，需要使用result.body才能得到返回回来的数据
+
+  </script>
+</body>
+
+</html>
