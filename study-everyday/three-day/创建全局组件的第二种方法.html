@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+            <mycom1></mycom1>
+    </div>
+    
+    <script> 
+
+        // 此方法直接省略Vue.extend()方法
+        // tempalte中标签必须有且只能有唯一的一个根元素
+        Vue.component('mycom1', {
+            template:  '<div><h3>这是使用Vue,extend方法创建出来的全局组件</h3><span>1111</span></div>'
+        })
+
+
+        var vm = new Vue({
+            el: '#app',
+            data:{},
+            methods: {}
+        })
+    
+    </script>
+    
+</body>
+</html>

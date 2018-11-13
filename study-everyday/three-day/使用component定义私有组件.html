@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 3.在被控制的app实例中使用 -->
+        <name></name>
+    </div>
+
+    <!-- 2.在被控制的app外面定义组件要渲染的html页面结构 -->
+    <template id="temp">
+        <h1>我是Vue实例对象中的私有组件,我只给和我绑定的Vue实例对象使用，其他Vue实例对象无法使用</h1>
+    </template>
+
+    <script>
+        //1.创建Vue实例对象
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // 此方法可以定义实例内部的私有组件
+            components: {
+                // name为创建的组件名
+                name: {
+                    template: '#temp'
+                }
+            },
+        })
+    
+    
+    
+    </script>
+    
+</body>
+</html>

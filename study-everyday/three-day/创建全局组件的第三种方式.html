@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 3.调用全局组件的组件名，开始使用全局组件 -->
+        <mycom3></mycom3>
+    </div>
+
+    <!-- 4这个mycom3因为是全局组件，所以也可以被其他vue实例所使用 -->
+    <div id="app2">
+            <mycom3></mycom3>
+    </div>
+
+          
+    <!-- 2.在被控制的app外面定义template要渲染的页面结构 -->
+    <template id="tmpl">
+        <!-- template渲染的标签只能是跟标签 -->
+        <div>
+            <h3>周旭是坨屎</h3>
+            <h1>对的</h1>
+        </div>
+
+    </template>
+    
+    <script> 
+
+        // 1.创建全局组件
+        Vue.component('mycom3', {
+            template: '#tmpl'
+        })        
+
+
+        var vm = new Vue({
+            el: '#app',
+            data:{},
+            methods: {}
+        })
+
+        var vm = new Vue({
+            el: '#app2',
+        })
+    
+    </script>
+    
+</body>
+</html>
