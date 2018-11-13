@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+            <!-- 2.使用全局组件 -->
+            <mycom1></mycom1>
+    </div>
+    
+    <script> 
+    
+
+        // 简写形式
+        // 1.创建全局组件
+        // mycom1：自己取的组件名
+        // Vue.extend:创建组件的方法
+        // template: 将来展示到页面的内容
+        Vue.component('mycom1', Vue.extend({
+            template: '<h3>这是使用Vue,extend方法创建出来的全局组件</h3>'
+        }))
+
+
+        var vm = new Vue({
+            el: '#app',
+            data:{},
+            methods: {}
+        })
+    
+    </script>
+    
+</body>
+</html>

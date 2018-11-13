@@ -21,10 +21,11 @@
   <div id="app">
     <input type="button" value="快到碗里来" @click="flag=!flag">
     <!-- 1. 使用 transition 元素把 小球包裹起来 -->
-   <transition>
+   <transition
        @before-enter="beforeEnter"
-       @enter=enter
-       @after-enter="afterEnter"
+       @enter="enter"
+       @after-enter="afterEnter">
+       
        <div class="ball" v-show="flag"></div>
    </transition>
   </div>
@@ -42,11 +43,13 @@
       methods: {
           // 钩子函数中的第一个参数el表示要执行动画的那个DOM元素，是原生的Js对象
         beforeEnter(el) {
+          // console.log('enter')
             // beforeEnter表示动画开始之前，还没有开始，可以设置此时动画开始之前的起始样式
             el.style.transform = "translate(0, 0)"
         },
         // 此时需要传入done，表示动画执行结束的回调
         enter(el, done) {
+          // console.log('enter')
             el.offsetWidth
             // Enter表示动画从开始到执行的这个过程，就是进入的过程
             el.style.transform = "translate(150px, 450px)"
@@ -55,6 +58,7 @@
             done()
         },
         afterEnter(el) {
+          // console.log('enter')
             this.flag = !this.flag
         }
       }

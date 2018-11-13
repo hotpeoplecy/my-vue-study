@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <mycom></mycom>
+    </div>
+    
+    <script>
+
+        // 总结: 1组件中的data使用方法和Vue实例中使用的方法完全一样！！！
+              // 2.data是一个函数的意义：每次都可以被重新调用，保证唯一性
+
+        Vue.component('mycom', {
+            //如果想要使用msg中的信息，和vue实例中的方法一样
+            template: '<h1>组件中华data使用方法演示的案例---{{ msg }}</h1>',
+            // data必须为一个函数
+            data: function(){
+                // 并且必须有返回值，返回值还要是一个对象
+                return {
+                    msg: '我是组件中定义的data方法'
+                }
+            } 
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {}
+        })
+    
+
+    
+    
+    </script>
+    
+</body>
+</html>
