@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <!-- 1.安装路由vue-router模板 -->   
+    <script src="lib/vue-router-3.0.1.js"></script>
+    <style>
+        .router-link-active,
+        .myClass {
+            color: blue;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 80px;
+            text-decoration: underline;
+            background-color: green;
+        }
+        
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.8s ease;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 因为写a标签每次都要写#，所有用此方法 -->
+         <!-- <a href="#/login">登录</a> -->
+        <router-link to = "/login" tag="span">登录</router-link>
+        <router-link to = "/register">注册</router-link>
+
+        <!-- 5.写占位符，将来路由匹配的规则就会被放到这里面 -->
+    <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+
+    
+
+
+
+    <script>
+        // 3.创建组件模板对象
+    var login = {
+        template: '<h1>登录组件</h1>'
+    }
+
+    var register = {
+        template: '<h1>注册组件</h1>'
+    }
+
+    // 2.创建路由对象
+    var routerObj = new VueRouter({
+        // 配置路由配置规则
+        routes: [
+        // 属性1 是 path， 表示监听 哪个路由链接地址；
+        //  属性2 是 component， 表示，如果 路由是前面匹配到的 path ，则展示 component 属性对应的那个组件
+            {path: '/', redirect: '/login'},
+            {path: '/login', component: login},
+            {path: '/register', component: register}
+        ],
+        // 为a标签添加样式
+        linkActiveClass: 'myClass'
+    })
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // 4.将路由对象注册到vm实例上，用来监听URL相应的变化，然后展示对应的组件
+            router: routerObj
+        })
+
+        // 总结: 前端路由是页面上组件的相互跳转，他不需要向后台发送ajax数据，不刷新页面，
+        // 而后端路由，是页面与页面之间相互发送ajax数据，并有页面刷新，所以，前端路由即为页面之间的相互跳转
+
+    </script>
+    
+</body>
+</html>
