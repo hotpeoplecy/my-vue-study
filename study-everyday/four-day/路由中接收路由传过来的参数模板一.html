@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <script src="lib/vue-router-3.0.1.js"></script>
+    <style>
+        .router-link-active,
+        .myClass {
+            color: blue;
+            font-weight: 800;
+            font-style: italic;
+            font-size: 80px;
+            text-decoration: underline;
+            background-color: green;
+        }
+        
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.8s ease;
+        }
+        
+    
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 1.如果要穿参，不需要修改path的值，可以在这里根据http地址传参方式传参 -->
+        <router-link to="/login?id=1&name=zx">登录</router-link>
+        <router-link to="/register?id=2&name=cy">注册</router-link>
+        <!-- 5.定义占位符，将来路由模块里匹配的规则，就会被放到这里 -->
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+
+    <script>
+
+        // 2.创建组件路由模块
+        var login = {
+            // 6.接收路由定义中的参数。直接在模板中以模板方式进行接收 template: '<h1>登录 --- {{ $route.query.id }} --- {{ $route.query.name }}</h1>',
+            template: '<h1>登录组件---{{$route.query.id}}---{{$route.query.name}}</h1>'
+        }
+       var register = {
+           template: '<h1>注册组件---{{$route.query.id}}--{{$route.query.name}}</h1>'
+       }
+
+
+    
+   
+
+        // 1.创建路由对象
+        var routerObj = new VueRouter({
+            // 配置路由规则
+            routes: [
+                {path: '/', redirect: '/login'},
+                {path: '/login', component: login},
+                {path: '/register', component: register}
+            ],
+            linkActiveClass: 'myClass'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // 3.将路由模块注册到Vue实例上
+            router: routerObj
+        })
+    
+    
+    </script>
+    
+</body>
+</html>

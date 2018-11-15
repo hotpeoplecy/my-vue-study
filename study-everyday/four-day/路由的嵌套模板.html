@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+    <script src="lib/vue-router-3.0.1.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 8.定义跟路由的标签 -->
+        <router-link to="/account">Account</router-link>
+
+        <!-- 9.定义根模块的占位符 -->
+        <router-view></router-view>     
+    </div>
+
+    <!-- 5.定义根路由的模板   将来根路由里面的数据都会被放在这里-->
+    <tempalte id="temp">
+        <h1>我是跟路由Account</h1>
+
+        <!-- 6.在根路由里镶嵌子路由 --> 
+        <router-link to="/account/login">登录</router-link>
+        <router-link to="/account/register">注册</router-link>
+
+        <!-- 7.定义子组件的占位符，将来路由匹配的规则都会被放在这里 -->
+        <router-view></router-view>
+    </tempalte>
+
+    <script>
+
+        // 3.创建路根由模块
+        var account = {
+            template: '#temp'
+        }
+        // 4.创建子路由模板
+        var login = {
+            template: '<h3>登录</h3>'
+        }
+        
+        var register = {
+            template: '<h3>注册</h3>'
+        }
+
+
+        // 1.创建一个路由模板
+        var router = new VueRouter({
+            routes: [
+                // 定义跟路由规则
+                {
+                    path: '/account', component: account,
+                    // 定义跟路由里面的字路由,里面不能偶斜杠，否则永远访问的都是跟路由
+                    children: [
+                        {path: 'login', component: login},
+                        {path: 'register', component: register}
+                    ]
+                },
+                
+            ]
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // 2.把创建的路由对象挂载到Vue实例上
+            // router = router;
+            router
+        })
+    
+    </script>
+    
+</body>
+</html>
