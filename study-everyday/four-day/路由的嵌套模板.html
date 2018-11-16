@@ -18,16 +18,20 @@
     </div>
 
     <!-- 5.定义根路由的模板   将来根路由里面的数据都会被放在这里-->
-    <tempalte id="temp">
-        <h1>我是跟路由Account</h1>
+    <template id="temp">
 
-        <!-- 6.在根路由里镶嵌子路由 --> 
-        <router-link to="/account/login">登录</router-link>
-        <router-link to="/account/register">注册</router-link>
+        <div>
+            <h1>我是跟路由Account</h1>
+    
+            <!-- 6.在根路由里镶嵌子路由 --> 
+            <router-link to="/account/login">登录</router-link>
+            <router-link to="/account/register">注册</router-link>
+    
+            <!-- 7.定义子组件的占位符，将来路由匹配的规则都会被放在这里 -->
+            <router-view></router-view>
 
-        <!-- 7.定义子组件的占位符，将来路由匹配的规则都会被放在这里 -->
-        <router-view></router-view>
-    </tempalte>
+        </div>
+    </template>
 
     <script>
 
