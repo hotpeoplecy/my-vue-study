@@ -1,10 +1,16 @@
-// 1.1 初始化文件：npm init -y   b.安装：npm i jquery -S
-// 1.导入jquery
-// import *** from *** 是ES6中导入模块的方式
-import $ from 'jquery' 
+// 导入jquery 此时浏览器会报错，需装包
+import $ from 'jquery'
 
-//2.创建入口函数
-$(function() {
-    $('li:odd').css('backgroundColor', 'red')
-    $('li:even').css('backgroundColor','lightblue');
-})
+// 引入外面css文件
+import './css/index.css'
+
+// 引入外部less文件
+import './css/test.less'
+
+// 引入外部的sass文件
+import './css/demo.scss'
+
+$(function () {  
+    $('ul>li:odd').css('backgroundColor', 'blue')
+    $('ul>li:even').css('backgroundColor', 'purple')
+  })

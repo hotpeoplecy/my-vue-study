@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app"></div>
+    <template id="temp">
+        <input type="button" value="点我就接收父组件传过来的值" @click="sendMsg">
+    </template>
+    <script>
+        
+        var com1 = {
+            template: '#temp',
+            dat() {
+                return {
+                    msg: '我是子组件中传递给父组件的数据'
+                }
+            },
+            methods: {
+                sendMsg() {
+                    this.$emit('func', this.msg)
+                }
+            } 
+        }
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            msgFormSon: '',
+            getMsgFormSon(data) {
+                this.msgFormSon = data,
+                console.log(this.msgFormSon)
+            },
+            components: {
+                com1
+            }
+        })
+    
+    
+    </script>
+    
+</body>
+</html>
